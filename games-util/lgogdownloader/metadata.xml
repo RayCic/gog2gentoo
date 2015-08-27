@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer>
+		<email>ray@apollo.lv</email>
+		<name>Raimonds Cicans</name>
+	</maintainer>
+	<upstream>
+		<bugs-to>https://github.com/Sude-/lgogdownloader/issues</bugs-to>
+		<changelog>https://github.com/Sude-/lgogdownloader/commits/master</changelog>
+		<remote-id type="github">Sude-/lgogdownloader</remote-id>
+	</upstream>
+</pkgmetadata>

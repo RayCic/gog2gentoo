@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE repositories SYSTEM "/dtd/repositories.dtd">
+<repositories xmlns="" version="1.0">
+	<repo quality="experimental" status="unofficial">
+		<name>gog2gentoo</name>
+		<description>GOG games Gentoo overlay</description>
+		<homepage>https://github.com/RayCic/gog2gentoo</homepage>
+		<owner>
+			<email>ray@apollo.lv</email>
+			<name>Raimonds Cicans</name>
+		</owner>
+		<source type="git">https://github.com/RayCic/gog2gentoo.git</source>
+	</repo>
+</repositories>
