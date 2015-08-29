@@ -12,6 +12,7 @@ EGIT_REPO_URI="https://github.com/Sude-/lgogdownloader.git"
 
 LICENSE="WTFPL"
 SLOT="0"
+IUSE="debug"
 
 DEPEND="dev-libs/jsoncpp
 	net-libs/liboauth
@@ -22,3 +23,14 @@ DEPEND="dev-libs/jsoncpp
 	net-libs/htmlcxx"
 
 RDEPEND="${DEPEND}"
+
+src_prepare() {
+	sed -i -e 's/LDFLAGS_RELEASE =  $(LDFLAGS) -s/LDFLAGS_RELEASE =  $(LDFLAGS)/' Makefile
+}
+
+src_compile() {
+	if use debug; then
+	    emake debug || die
+	fi
+	emake release || die
+}
