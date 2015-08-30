@@ -1,4 +1,4 @@
-#0 Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
@@ -35,7 +35,7 @@ gog_s="data/noarch/game"
 S="${WORKDIR}/${gog_s}"
 dir=${GAMES_PREFIX_OPT}/${PN}
 
-EXPORT_FUNCTIONS pkg_nofetch src_unpack
+EXPORT_FUNCTIONS pkg_nofetch src_unpack pkg_postinst
 
 gog-games_pkg_nofetch() {
 	einfo "Please download ${SRC_URI} from your GOG.com account after buying '${DESCRIPTION}'"
@@ -45,8 +45,8 @@ gog-games_pkg_nofetch() {
 	einfo "   1) by internet browser"
 	einfo "      a) open page 'https://www.gog.com/'"
 	einfo "      b) login into your account"
-	einfo "      c) go to 'Library' section"
-	einfo "      d) select 'Amnesia: The Dark Descent'"
+	einfo "      c) go to 'Account' section"
+	einfo "      d) select '${DESCRIPTION}'"
 	einfo "      e) chose 'OS: Linux' and 'Language: Englih' (Linux version of archive contains all supported languages)"
 	einfo "      f) in file list click on '${DESCRIPTION}'"
 	einfo "   2) by programm 'lgogdownloader'"
@@ -59,6 +59,27 @@ gog-games_pkg_nofetch() {
 }
 
 gog-games_src_unpack() {
-	unzip -qq "${DISTDIR}/${A}" "${gog_s}/*" 2>/dev/null
-	[[ $? -gt 1 ]] && die "Unzip failed"
+	for file in ${A}; do
+		unzip -qq -o "${DISTDIR}/${file}" "${gog_s}/*" 2>/dev/null
+		[[ $? -gt 1 ]] && die "Unzip failed"
+	done
+}
+
+gog-games_pkg_postinst() {
+	if [ ! -z "${game_require_serial_key}" ]; then
+		elog "This game require serial key. You can obtain serial key following way"
+		elog "   1) open in internet browser 'https://www.gog.com'"
+		elog "   2) login in your account"
+		elog "   3) go to 'Account' section"
+		elog "   3) select '${DESCRIPTION}'"
+		elog "   4) click on list button 'MORE'"
+		elog "   5) select 'SERIAL KEYS'"
+		elog
+	fi
+
+	if has bundled-libs ${IUSE}; then
+		if ! use bundled-libs; then
+			elog "If you have problems like distorted audio or video, then try to reinstall package with 'bundled-libs' use flag turned on"
+		fi
+	fi
 }

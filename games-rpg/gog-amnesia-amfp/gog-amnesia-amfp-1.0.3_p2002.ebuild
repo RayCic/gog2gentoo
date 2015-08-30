@@ -8,14 +8,14 @@
 
 EAPI="5"
 
-CHECKREQS_DISK_BUILD=2500M
+CHECKREQS_DISK_BUILD=5500M
 
 inherit gog-games
 
-DESCRIPTION="Amnesia: The Dark Descent"
-HOMEPAGE="https://www.gog.com/game/amnesia_the_dark_descent"
+DESCRIPTION="Amnesia: A Machine For Pigs"
+HOMEPAGE="https://www.gog.com/game/amnesia_a_machine_for_pigs"
 
-SRC_URI="gog_amnesia_the_dark_descent_2.0.0.3.sh"
+SRC_URI="gog_amnesia_a_machine_for_pigs_2.0.0.2.sh"
 
 KEYWORDS="-* ~amd64 ~x86"
 IUSE="bundled-libs"
@@ -29,7 +29,7 @@ RDEPEND="!bundled-libs? ( media-libs/devil
 
 DEPEND=""
 
-gog_pn="amnesia_the_dark_descent"
+gog_pn="amnesia_a_machine_for_pigs"
 
 src_install() {
 	if use bundled-libs; then
@@ -39,19 +39,19 @@ src_install() {
 		rm -rf lib lib64 || die
 	fi
 
-	chmod 0750 Amnesia.bin.x86 Launcher.bin.x86 Amnesia.bin.x86_64 Launcher.bin.x86_64
+	chmod 0750 AmnesiaAMFP.bin.x86 Launcher.bin.x86 AmnesiaAMFP.bin.x86_64 Launcher.bin.x86_64
 
-	use amd64 || rm Amnesia.bin.x86_64 Launcher.bin.x86_64 || die
-	use x86 || rm Amnesia.bin.x86 Launcher.bin.x86 || die
+	use amd64 || rm AmnesiaAMFP.bin.x86_64 Launcher.bin.x86_64 || die
+	use x86 || rm AmnesiaAMFP.bin.x86 Launcher.bin.x86 || die
 
 	# We do not use standart functions to save space and time
 	mkdir -p "${D}${dir}" || die
 	mv * "${D}${dir}" || die
-	cp "${D}${dir}/Amnesia.png" . || die
+	cp "${D}${dir}/AmnesiaAMFP.png" . || die
 
 	use amd64 && games_make_wrapper "${PN}" ./Launcher.bin.x86_64 "${dir}"
 	use x86 && games_make_wrapper "${PN}" ./Launcher.bin.x86 "${dir}"
-	newicon Amnesia.png "${PN}.png"
+	newicon AmnesiaAMFP.png "${PN}.png"
 	make_desktop_entry "${PN}" "${DESCRIPTION}" ${PN}
 
 	prepgamesdirs
