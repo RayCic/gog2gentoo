@@ -8,7 +8,7 @@
 
 EAPI="5"
 
-CHECKREQS_DISK_BUILD=35G
+CHECKREQS_DISK_BUILD=28G
 
 inherit gog-games
 
@@ -19,12 +19,13 @@ SRC_URI="gog_the_witcher_2_assassins_of_kings_enhanced_edition_2.2.0.8.sh"
 
 KEYWORDS="-* ~amd64 ~x86"
 
-IUSE="crash-reporter"
+IUSE="crash-reporter alsa nas oss pulseaudio"
+REQUIRED_USE="|| ( alsa nas oss pulseaudio )"
 
 RDEPEND="dev-libs/glib:2[abi_x86_32(-)]
 	media-libs/freetype[abi_x86_32(-)]
-	media-libs/libsdl2[abi_x86_32(-)]
-	media-libs/sdl2-image[abi_x86_32(-)]
+	media-libs/libsdl2[X,alsa?,haptic,joystick,nas?,opengl,oss?,pulseaudio?,sound,threads,video,abi_x86_32(-)]
+	media-libs/sdl2-image[png,abi_x86_32(-)]
 	media-libs/sdl2-ttf[abi_x86_32(-)]
 	virtual/opengl[abi_x86_32(-)]
 	x11-libs/cairo[abi_x86_32(-)]
