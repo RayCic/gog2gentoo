@@ -20,10 +20,11 @@ SRC_URI="gog_darwinia_2.0.0.5.sh"
 KEYWORDS="-* ~amd64 ~x86"
 IUSE="bundled-libs"
 
-RDEPEND="!bundled-libs? ( virtual/glu
-			media-libs/libsdl
-			media-libs/libogg
-			media-libs/libvorbis )"
+RDEPEND="!bundled-libs? ( media-libs/libogg
+				media-libs/libsdl
+				media-libs/libvorbis
+				virtual/glu
+				virtual/opengl )"
 
 DEPEND=""
 

@@ -19,18 +19,33 @@ SRC_URI="gog_the_witcher_2_assassins_of_kings_enhanced_edition_2.2.0.8.sh"
 
 KEYWORDS="-* ~amd64 ~x86"
 
-RDEPEND="media-libs/libsdl2[abi_x86_32(-)]
+IUSE="crash-reporter"
+
+RDEPEND="dev-libs/glib:2[abi_x86_32(-)]
+	media-libs/freetype[abi_x86_32(-)]
+	media-libs/libsdl2[abi_x86_32(-)]
 	media-libs/sdl2-image[abi_x86_32(-)]
+	media-libs/sdl2-ttf[abi_x86_32(-)]
+	virtual/opengl[abi_x86_32(-)]
+	x11-libs/cairo[abi_x86_32(-)]
+	x11-libs/gdk-pixbuf:2[abi_x86_32(-)]
 	x11-libs/gtk+:2[abi_x86_32(-)]
-	media-libs/freetype[abi_x86_32(-)]"
+	x11-libs/libX11[abi_x86_32(-)]
+	crash-reporter? ( x11-libs/gtk+:3
+				>=sys-devel/gcc-4.9 )"
 
 DEPEND=""
 
 gog_pn="the_witcher_2"
 
 src_install() {
-	cat CookedPC/pack0.dzip.split* > CookedPC/pack0.dzip || die
-	rm CookedPC/pack0.dzip.split* || die
+	cat CookedPC/pack0.dzip.split01 >> CookedPC/pack0.dzip.split00 || die
+	rm CookedPC/pack0.dzip.split01 || die
+	cat CookedPC/pack0.dzip.split02 >> CookedPC/pack0.dzip.split00 || die
+	rm CookedPC/pack0.dzip.split02 || die
+	mv CookedPC/pack0.dzip.split00 CookedPC/pack0.dzip
+
+	use crash-reporter || rm CrashReporter* || die
 
 	# We do not use standart functions to save space and time
 	mkdir -p "${D}${dir}" || die

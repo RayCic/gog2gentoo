@@ -20,7 +20,8 @@ SRC_URI="gog_broken_sword_5_the_serpent_s_curse_2.0.0.2.sh"
 KEYWORDS="-* ~amd64 ~x86"
 IUSE="bundled-libs"
 
-RDEPEND="!bundled-libs? ( media-libs/openal )"
+RDEPEND="!bundled-libs? ( media-libs/openal
+				virtual/opengl )"
 
 DEPEND=""
 

@@ -20,10 +20,12 @@ SRC_URI="gog_a_golden_wake_2.0.0.4.sh"
 KEYWORDS="-* ~amd64 ~x86"
 IUSE="bundled-libs"
 
-RDEPEND="!bundled-libs? ( media-libs/libsdl2
+RDEPEND="!bundled-libs? ( media-libs/freetype
+				media-libs/libogg
+				media-libs/libsdl2
 				media-libs/libtheora
 				media-libs/libvorbis
-				media-libs/libogg )"
+				virtual/opengl )"
 
 DEPEND=""
 

@@ -5,6 +5,9 @@
 		<email>ray@apollo.lv</email>
 		<name>Raimonds Cicans</name>
 	</maintainer>
+	<use>
+		<flag name='crash-reporter'>Enable crash reporter for bugs.</flag>
+	</use>
 	<upstream>
 		<bugs-to>https://www.gog.com/support</bugs-to>
 	</upstream>

@@ -19,13 +19,20 @@ SRC_URI="gog_clarc_2.0.0.4.sh"
 
 KEYWORDS="-* ~amd64 ~x86"
 
-RDEPEND="virtual/opengl[abi_x86_32(-)]
-	x11-libs/libXau[abi_x86_32(-)]
+RDEPEND="dev-libs/atk[abi_x86_32(-)]
+	dev-libs/glib:2[abi_x86_32(-)]
+	media-libs/fontconfig[abi_x86_32(-)]
+	media-libs/freetype[abi_x86_32(-)]
+	virtual/glu[abi_x86_32(-)]
+	virtual/opengl[abi_x86_32(-)]
+	x11-libs/cairo[abi_x86_32(-)]
+	x11-libs/gdk-pixbuf:2[abi_x86_32(-)]
+	x11-libs/gtk+:2[abi_x86_32(-)]
+	x11-libs/libX11[abi_x86_32(-)]
 	x11-libs/libXcursor[abi_x86_32(-)]
-	x11-libs/libXdmcp[abi_x86_32(-)]
-	x11-libs/libXfixes[abi_x86_32(-)]
-	x11-libs/libXrender[abi_x86_32(-)]
-	x11-libs/libxcb[abi_x86_32(-)]"
+	x11-libs/libXext[abi_x86_32(-)]
+	x11-libs/pango[abi_x86_32(-)]"
+
 DEPEND=""
 
 gog_pn="clarc"

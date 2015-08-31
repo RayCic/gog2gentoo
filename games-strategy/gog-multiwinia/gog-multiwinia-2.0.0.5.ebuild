@@ -20,13 +20,14 @@ SRC_URI="gog_multiwinia_2.0.0.5.sh"
 KEYWORDS="-* ~amd64 ~x86"
 IUSE="bundled-libs"
 
-RDEPEND="!bundled-libs? ( virtual/glu
-			media-libs/libsdl
-			media-libs/libogg
-			media-libs/libvorbis
-			media-libs/openal
-			media-libs/libpng:1.2
-			sys-libs/zlib )"
+RDEPEND="!bundled-libs? ( media-libs/libogg
+				media-libs/libpng:1.2
+				media-libs/libsdl
+				media-libs/libvorbis
+				media-libs/openal
+				sys-libs/zlib
+				virtual/glu
+				virtual/opengl )"
 
 DEPEND=""
 

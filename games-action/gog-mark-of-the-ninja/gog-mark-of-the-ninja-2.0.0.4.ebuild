@@ -21,7 +21,8 @@ SRC_URI="gog_mark_of_the_ninja_2.0.0.4.sh
 KEYWORDS="-* ~amd64 ~x86"
 IUSE="bundled-libs dlc"
 
-RDEPEND="!bundled-libs? ( media-libs/libsdl )"
+RDEPEND="!bundled-libs? ( media-libs/libsdl
+				virtual/opengl )"
 
 DEPEND=""
 

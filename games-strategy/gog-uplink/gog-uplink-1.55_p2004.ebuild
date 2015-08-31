@@ -20,18 +20,14 @@ SRC_URI="gog_uplink_hacker_elite_2.0.0.4.sh"
 KEYWORDS="-* ~amd64 ~x86"
 IUSE="bundled-libs"
 
-RDEPEND="!bundled-libs? ( virtual/glu
-			media-libs/libsdl
-			media-libs/sdl-mixer
-			media-libs/freetype
-			virtual/jpeg
-			media-libs/libmikmod
-			media-libs/libogg
-			media-libs/openal
-			media-libs/libpng:1.2
-			media-libs/tiff:3
-			media-libs/libvorbis
-			sys-libs/zlib )"
+RDEPEND="!bundled-libs? ( media-libs/freetype
+				media-libs/libsdl
+				media-libs/sdl-mixer
+				media-libs/tiff
+				sys-libs/zlib
+				virtual/glu
+				virtual/jpeg:62
+				virtual/opengl )"
 
 DEPEND=""
 

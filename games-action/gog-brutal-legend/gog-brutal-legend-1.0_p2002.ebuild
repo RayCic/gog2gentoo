@@ -21,7 +21,10 @@ KEYWORDS="-* ~amd64 ~x86"
 
 IUSE="bundled-libs"
 
-RDEPEND="!bundled-libs? ( media-libs/libsdl2[abi_x86_32(-)] )"
+RDEPEND="!bundled-libs? ( media-libs/libsdl2[abi_x86_32(-)]
+				sys-libs/zlib[abi_x86_32(-)]
+				virtual/glu[abi_x86_32(-)]
+				virtual/opengl[abi_x86_32(-)] )"
 
 DEPEND=""
 

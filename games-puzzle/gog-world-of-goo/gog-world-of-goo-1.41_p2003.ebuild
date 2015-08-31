@@ -21,8 +21,9 @@ KEYWORDS="-* ~amd64 ~x86"
 IUSE="bundled-libs"
 
 RDEPEND="!bundled-libs? ( media-libs/libsdl
-			media-libs/sdl-mixer
-			media-libs/libogg )"
+				media-libs/sdl-mixer
+				virtual/glu
+				virtual/opengl )"
 
 DEPEND=""
 
