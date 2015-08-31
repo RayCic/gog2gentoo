@@ -22,9 +22,13 @@ KEYWORDS="-* ~amd64 ~x86"
 IUSE="bundled-libs alsa nas oss pulseaudio"
 REQUIRED_USE="|| ( alsa nas oss pulseaudio )"
 
+# - for media-libs/sdl-mixer 'modplug' flag causes strange noises instead of music
+# - media-libs/libmikmod is not direct dependency but we include it to enforce same
+#    sound system configuration
 RDEPEND="!bundled-libs? ( media-libs/freetype
 				media-libs/libsdl[X,opengl,video,sound,alsa?,nas?,oss?,pulseaudio?]
-				media-libs/sdl-mixer
+				media-libs/sdl-mixer[mikmod,mod,-modplug]
+				media-libs/libmikmod[alsa?,nas?,oss?,pulseaudio?]
 				media-libs/tiff:3
 				sys-libs/zlib
 				virtual/glu
