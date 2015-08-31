@@ -26,8 +26,8 @@ RDEPEND="!bundled-libs? ( media-libs/freetype
 				media-libs/tiff
 				sys-libs/zlib
 				virtual/glu
-				virtual/jpeg:62
-				virtual/opengl )"
+				virtual/jpeg:62 )
+	virtual/opengl"
 
 DEPEND=""
 
