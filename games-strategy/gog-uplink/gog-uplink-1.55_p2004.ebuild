@@ -21,9 +21,12 @@ KEYWORDS="-* ~amd64 ~x86"
 IUSE="bundled-libs"
 
 RDEPEND="!bundled-libs? ( media-libs/freetype
-				media-libs/libsdl
+				|| ( media-libs/libsdl[X,opengl,video,sound,pulseaudio]
+					media-libs/libsdl[X,opengl,video,sound,alsa]
+					media-libs/libsdl[X,opengl,video,sound,nas]
+					media-libs/libsdl[X,opengl,video,sound,oss] )
 				media-libs/sdl-mixer
-				media-libs/tiff
+				media-libs/tiff:3
 				sys-libs/zlib
 				virtual/glu
 				virtual/jpeg:62 )
@@ -55,4 +58,14 @@ src_install() {
 	make_desktop_entry "${PN}" "${DESCRIPTION}" ${PN}
 
 	prepgamesdirs
+}
+
+pkg_postinst() {
+	gog-games_pkg_postinst
+
+	if use bundled-libs; then
+		elog "You chose 'bundled-libs' USE flag. Bundled libraries support only OSS audio system"
+		elog "You must have OSS compatible audi drivers or some kind of OSS wrapper (emulator)"
+		elog "for your audio system."
+	fi
 }
