@@ -18,18 +18,20 @@ HOMEPAGE="https://www.gog.com/game/uplink_hacker_elite"
 SRC_URI="gog_uplink_hacker_elite_2.0.0.4.sh"
 
 KEYWORDS="-* ~amd64 ~x86"
-IUSE="bundled-libs"
+
+IUSE="bundled-libs alsa nas oss pulseaudio"
+REQUIRED_USE="|| ( alsa nas oss pulseaudio )"
 
 RDEPEND="!bundled-libs? ( media-libs/freetype
-				|| ( media-libs/libsdl[X,opengl,video,sound,pulseaudio]
-					media-libs/libsdl[X,opengl,video,sound,alsa]
-					media-libs/libsdl[X,opengl,video,sound,nas]
-					media-libs/libsdl[X,opengl,video,sound,oss] )
+				media-libs/libsdl[X,opengl,video,sound,alsa?,nas?,oss?,pulseaudio?]
 				media-libs/sdl-mixer
 				media-libs/tiff:3
 				sys-libs/zlib
 				virtual/glu
 				virtual/jpeg:62 )
+	bundled-libs? ( alsa? ( media-libs/alsa-lib )
+			nas? ( media-libs/nas )
+			pulseaudio? ( media-sound/pulseaudio ) )
 	virtual/opengl"
 
 DEPEND=""
@@ -58,14 +60,4 @@ src_install() {
 	make_desktop_entry "${PN}" "${DESCRIPTION}" ${PN}
 
 	prepgamesdirs
-}
-
-pkg_postinst() {
-	gog-games_pkg_postinst
-
-	if use bundled-libs; then
-		elog "You chose 'bundled-libs' USE flag. Bundled libraries support only OSS audio system"
-		elog "You must have OSS compatible audi drivers or some kind of OSS wrapper (emulator)"
-		elog "for your audio system."
-	fi
 }
