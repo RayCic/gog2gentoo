@@ -18,12 +18,18 @@ HOMEPAGE="https://www.gog.com/game/world_of_goo"
 SRC_URI="gog_world_of_goo_2.0.0.3.sh"
 
 KEYWORDS="-* ~amd64 ~x86"
-IUSE="bundled-libs"
 
-RDEPEND="!bundled-libs? ( media-libs/libsdl
-				media-libs/sdl-mixer
-				virtual/glu
-				virtual/opengl )"
+IUSE="bundled-libs alsa nas oss pulseaudio"
+REQUIRED_USE="|| ( alsa nas oss pulseaudio )"
+
+RDEPEND="!bundled-libs? ( media-libs/libsdl[X,opengl,video,sound,alsa?,nas?,oss?,pulseaudio?]
+				media-libs/sdl-mixer[vorbis] )
+	bundled-libs? ( media-libs/libvorbis
+			alsa? ( media-libs/alsa-lib )
+			nas? ( media-libs/nas )
+			pulseaudio? ( media-sound/pulseaudio ) )
+	virtual/glu
+	virtual/opengl"
 
 DEPEND=""
 
