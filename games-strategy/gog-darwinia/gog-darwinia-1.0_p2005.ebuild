@@ -18,13 +18,18 @@ HOMEPAGE="https://www.gog.com/game/darwinia"
 SRC_URI="gog_darwinia_2.0.0.5.sh"
 
 KEYWORDS="-* ~amd64 ~x86"
-IUSE="bundled-libs"
+
+IUSE="bundled-libs alsa nas oss pulseaudio"
+REQUIRED_USE="|| ( alsa nas oss pulseaudio )"
 
 RDEPEND="!bundled-libs? ( media-libs/libogg
-				media-libs/libsdl
-				media-libs/libvorbis
-				virtual/glu
-				virtual/opengl )"
+				media-libs/libsdl[X,opengl,video,sound,alsa?,nas?,oss?,pulseaudio?]
+				virtual/glu )
+	bundled-libs? ( alsa? ( media-libs/alsa-lib )
+			nas? ( media-libs/nas )
+			pulseaudio? ( media-sound/pulseaudio ) )
+	media-libs/libvorbis
+	virtual/opengl"
 
 DEPEND=""
 
@@ -32,6 +37,9 @@ gog_pn="darwinia"
 
 src_install() {
 	if use bundled-libs; then
+		# GOG installer contains only half of libvorbis library
+		# To prevent library files mismatch we delete bundled libvorbis files
+		rm lib/libvorbis.so* lib64/libvorbis.so* || die
 		use amd64 || rm -rf lib64 || die
 		use x86 || rm -rf lib || die
 	else
