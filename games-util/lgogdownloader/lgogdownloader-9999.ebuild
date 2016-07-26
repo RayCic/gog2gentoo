@@ -1,36 +1,29 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
 EAPI="5"
 
-inherit eutils git-r3
+CMAKE_MIN_VERSION="3.0.0"
+
+inherit cmake-utils git-r3
 
 DESCRIPTION="Linux compatible gog.com downloader"
 HOMEPAGE="https://sites.google.com/site/gogdownloader/"
 EGIT_REPO_URI="https://github.com/Sude-/lgogdownloader.git"
 
-LICENSE="WTFPL"
+LICENSE="WTFPL-2"
 SLOT="0"
-IUSE="debug"
+IUSE="+debug"
 
-DEPEND="dev-libs/jsoncpp
+RDEPEND="dev-libs/jsoncpp
 	net-libs/liboauth
-	net-misc/curl
 	dev-libs/boost
-	dev-libs/tinyxml
+	dev-libs/tinyxml2
 	app-crypt/rhash
-	net-libs/htmlcxx"
+	net-libs/htmlcxx
+	>=net-misc/curl-7.32.0"
 
-RDEPEND="${DEPEND}"
-
-src_prepare() {
-	sed -i -e 's/LDFLAGS_RELEASE =  $(LDFLAGS) -s/LDFLAGS_RELEASE =  $(LDFLAGS)/' Makefile
-}
-
-src_compile() {
-	if use debug; then
-	    emake debug || die
-	fi
-	emake release || die
-}
+DEPEND="${RDEPEND}
+	sys-apps/help2man
+	sys-apps/grep"

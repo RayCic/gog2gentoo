@@ -1,4 +1,4 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
@@ -52,7 +52,7 @@ gog-games_pkg_nofetch() {
 	einfo "   2) by programm 'lgogdownloader'"
 	einfo "      a) install 'games-util/lgogdownloader': emerge games-util/lgogdownloader"
 	einfo "      b) go to temporary directory"
-	einfo "      c) run: lgogdownloader --download --game ${gog_pn} --platform 4 --language 1 --no-extras --no-patches --no-language-packs --no-dlc"
+	einfo "      c) run: lgogdownloader --download --game ${gog_pn} --platform linux --include installers"
 	einfo "      d) enter login information"
 	einfo
 	einfo "And do not forget to move ${SRC_URI} to ${DISTDIR}"
