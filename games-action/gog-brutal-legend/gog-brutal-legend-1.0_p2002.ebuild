@@ -1,10 +1,6 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
-
-# TODO:
-# - find out all required use flags for dependencies
-# - find out all licenses on which package depends
 
 EAPI="5"
 
@@ -21,14 +17,16 @@ KEYWORDS="-* ~amd64 ~x86"
 
 IUSE="bundled-libs"
 
-RDEPEND="!bundled-libs? ( media-libs/libsdl2[abi_x86_32(-)]
-				sys-libs/zlib[abi_x86_32(-)]
-				virtual/glu[abi_x86_32(-)]
-				virtual/opengl[abi_x86_32(-)] )"
+RDEPEND="!bundled-libs? ( media-libs/libsdl2[abi_x86_32(-)] )
+	sys-libs/zlib[abi_x86_32(-)]
+	virtual/glu[abi_x86_32(-)]
+	virtual/opengl[abi_x86_32(-)]"
 
-DEPEND=""
+DEPEND="media-libs/libpng"
 
 gog_pn="brutal_legend"
+
+QA_PREBUILT="${dir:1}/Buddha.bin.x86"
 
 src_install() {
 	use bundled-libs || rm -rf lib/libSDL2-2.0.so.0 || die
@@ -36,7 +34,9 @@ src_install() {
 	# We do not use standart functions to save space and time
 	mkdir -p "${D}${dir}" || die
 	mv * "${D}${dir}" || die
-	cp "${D}${dir}/Buddha.png" . || die
+
+	pngfix --quiet --out=Buddha.png "${D}${dir}/Buddha.png"
+	cp --force Buddha.png "${D}${dir}/Buddha.png" || die "pngfix failed"
 
 	games_make_wrapper "${PN}" ./Buddha.bin.x86 "${dir}"
 	newicon Buddha.png "${PN}.png"
