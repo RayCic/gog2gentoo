@@ -1,19 +1,16 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
-# TODO:
-# - find out all required use flags for dependencies
-# - find out all licenses on which package depends
-
 EAPI="5"
+
+gog_pn="darwinia"
 
 CHECKREQS_DISK_BUILD=50M
 
 inherit gog-games
 
 DESCRIPTION="Darwinia"
-HOMEPAGE="https://www.gog.com/game/darwinia"
 
 SRC_URI="gog_darwinia_2.0.0.5.sh"
 
@@ -32,8 +29,6 @@ RDEPEND="!bundled-libs? ( media-libs/libogg
 	virtual/opengl"
 
 DEPEND=""
-
-gog_pn="darwinia"
 
 src_install() {
 	if use bundled-libs; then

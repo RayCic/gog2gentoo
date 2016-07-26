@@ -1,19 +1,16 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
-# TODO:
-# - find out all required use flags for dependencies
-# - find out all licenses on which package depends
-
 EAPI="5"
+
+gog_pn="uplink_hacker_elite"
 
 CHECKREQS_DISK_BUILD=50M
 
 inherit gog-games
 
 DESCRIPTION="Uplink: Hacker Elite"
-HOMEPAGE="https://www.gog.com/game/uplink_hacker_elite"
 
 SRC_URI="gog_uplink_hacker_elite_2.0.0.4.sh"
 
@@ -39,8 +36,6 @@ RDEPEND="!bundled-libs? ( media-libs/freetype
 	virtual/opengl"
 
 DEPEND=""
-
-gog_pn="uplink_hacker_elite"
 
 src_install() {
 	if use bundled-libs; then

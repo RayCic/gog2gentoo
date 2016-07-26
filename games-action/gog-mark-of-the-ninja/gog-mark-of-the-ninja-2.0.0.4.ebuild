@@ -1,19 +1,16 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
-# TODO:
-# - find out all required use flags for dependencies
-# - find out all licenses on which package depends
-
 EAPI="5"
+
+gog_pn="mark_of_the_ninja"
 
 CHECKREQS_DISK_BUILD=2500M
 
 inherit gog-games
 
 DESCRIPTION="Mark of the Ninja"
-HOMEPAGE="https://www.gog.com/game/mark_of_the_ninja"
 
 SRC_URI="gog_mark_of_the_ninja_2.0.0.4.sh
 	dlc? ( gog_mark_of_the_ninja_special_edition_dlc_2.0.0.4.sh )"
@@ -25,8 +22,6 @@ RDEPEND="!bundled-libs? ( media-libs/libsdl
 				virtual/opengl )"
 
 DEPEND=""
-
-gog_pn="mark_of_the_ninja"
 
 src_install() {
 	# Fix library files duplication

@@ -1,19 +1,16 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
-# TODO:
-# - find out all required use flags for dependencies
-# - find out all licenses on which package depends
-
 EAPI="5"
+
+gog_pn="clarc"
 
 CHECKREQS_DISK_BUILD=800M
 
 inherit gog-games
 
 DESCRIPTION="CLARC"
-HOMEPAGE="https://www.gog.com/game/clarc"
 
 SRC_URI="gog_clarc_2.0.0.4.sh"
 
@@ -34,8 +31,6 @@ RDEPEND="dev-libs/atk[abi_x86_32(-)]
 	x11-libs/pango[abi_x86_32(-)]"
 
 DEPEND=""
-
-gog_pn="clarc"
 
 src_install() {
 	# We do not use standart functions to save space and time

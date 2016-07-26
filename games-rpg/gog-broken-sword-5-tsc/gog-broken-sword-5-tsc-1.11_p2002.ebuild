@@ -1,12 +1,10 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
-# TODO:
-# - find out all required use flags for dependencies
-# - find out all licenses on which package depends
-
 EAPI="5"
+
+gog_pn="broken_sword_5_the_serpents_curse_episode_1"
 
 CHECKREQS_DISK_BUILD=7G
 
@@ -24,8 +22,6 @@ RDEPEND="!bundled-libs? ( media-libs/openal
 				virtual/opengl )"
 
 DEPEND=""
-
-gog_pn="broken_sword_5_the_serpents_curse_episode_1"
 
 src_install() {
 	use bundled-libs || rm -rf i386/libopenal.so.1 x86_64/libopenal.so.1 || die

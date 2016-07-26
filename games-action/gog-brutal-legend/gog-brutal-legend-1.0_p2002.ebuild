@@ -4,12 +4,13 @@
 
 EAPI="5"
 
+gog_pn="brutal_legend"
+
 CHECKREQS_DISK_BUILD=9G
 
 inherit gog-games
 
 DESCRIPTION="Brutal Legend"
-HOMEPAGE="https://www.gog.com/game/brutal_legend"
 
 SRC_URI="gog_brutal_legend_2.0.0.2.sh"
 
@@ -23,8 +24,6 @@ RDEPEND="!bundled-libs? ( media-libs/libsdl2[abi_x86_32(-)] )
 	virtual/opengl[abi_x86_32(-)]"
 
 DEPEND="media-libs/libpng"
-
-gog_pn="brutal_legend"
 
 QA_PREBUILT="${dir:1}/Buddha.bin.x86"
 

@@ -23,6 +23,8 @@ case "${EAPI:-0}" in
 		;;
 esac
 
+HOMEPAGE="https://www.gog.com/game/${gog_pn}"
+
 LICENSE="GOG-EULA"
 
 SLOT="0"

@@ -1,19 +1,16 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
-# TODO:
-# - find out all required use flags for dependencies
-# - find out all licenses on which package depends
-
 EAPI="5"
+
+gog_pn="world_of_goo"
 
 CHECKREQS_DISK_BUILD=80M
 
 inherit gog-games
 
 DESCRIPTION="World of Goo"
-HOMEPAGE="https://www.gog.com/game/world_of_goo"
 
 SRC_URI="gog_world_of_goo_2.0.0.3.sh"
 
@@ -32,8 +29,6 @@ RDEPEND="!bundled-libs? ( media-libs/libsdl[X,opengl,video,sound,alsa?,nas?,oss?
 	virtual/opengl"
 
 DEPEND=""
-
-gog_pn="world_of_goo"
 
 src_install() {
 	use bundled-libs || rm -rf libs32 libs64 || die

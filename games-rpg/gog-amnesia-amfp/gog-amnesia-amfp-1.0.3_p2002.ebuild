@@ -1,19 +1,16 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
-# TODO:
-# - find out all required use flags for dependencies
-# - find out all licenses on which package depends
-
 EAPI="5"
+
+gog_pn="amnesia_a_machine_for_pigs"
 
 CHECKREQS_DISK_BUILD=5500M
 
 inherit gog-games
 
 DESCRIPTION="Amnesia: A Machine For Pigs"
-HOMEPAGE="https://www.gog.com/game/amnesia_a_machine_for_pigs"
 
 SRC_URI="gog_amnesia_a_machine_for_pigs_2.0.0.2.sh"
 
@@ -35,8 +32,6 @@ RDEPEND="!bundled-libs? ( media-libs/devil
 				x11-libs/libXft )"
 
 DEPEND=""
-
-gog_pn="amnesia_a_machine_for_pigs"
 
 src_install() {
 	if use bundled-libs; then

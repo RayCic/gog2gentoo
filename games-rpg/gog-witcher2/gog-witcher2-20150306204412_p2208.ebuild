@@ -1,19 +1,16 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
-# TODO:
-# - find out all required use flags for dependencies
-# - find out all licenses on which package depends
-
 EAPI="5"
+
+gog_pn="the_witcher_2"
 
 CHECKREQS_DISK_BUILD=28G
 
 inherit gog-games
 
 DESCRIPTION="The Witcher 2: Assassins Of Kings - Enhanced Edition"
-HOMEPAGE="https://www.gog.com/game/the_witcher_2"
 
 SRC_URI="gog_the_witcher_2_assassins_of_kings_enhanced_edition_2.2.0.8.sh"
 
@@ -36,8 +33,6 @@ RDEPEND="dev-libs/glib:2[abi_x86_32(-)]
 				>=sys-devel/gcc-4.9 )"
 
 DEPEND=""
-
-gog_pn="the_witcher_2"
 
 src_install() {
 	cat CookedPC/pack0.dzip.split01 >> CookedPC/pack0.dzip.split00 || die
