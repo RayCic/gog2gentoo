@@ -30,6 +30,8 @@ RDEPEND="!bundled-libs? ( media-libs/libsdl[X,opengl,video,sound,alsa?,nas?,oss?
 
 DEPEND=""
 
+QA_PREBUILT="${dir:1}/WorldOfGoo.bin*"
+
 src_install() {
 	use bundled-libs || rm -rf libs32 libs64 || die
 
