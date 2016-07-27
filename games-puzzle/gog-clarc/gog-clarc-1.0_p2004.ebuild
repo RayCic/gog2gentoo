@@ -32,6 +32,9 @@ RDEPEND="dev-libs/atk[abi_x86_32(-)]
 
 DEPEND=""
 
+QA_PREBUILT="${dir:1}/CLARC_LINUX.x86
+	${dir:1}/CLARC_LINUX_Data/Mono/x86/libmono.so"
+
 src_install() {
 	# We do not use standart functions to save space and time
 	mkdir -p "${D}${dir}" || die
