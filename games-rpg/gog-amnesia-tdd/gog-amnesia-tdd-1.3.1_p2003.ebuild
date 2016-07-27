@@ -18,18 +18,18 @@ KEYWORDS="-* ~amd64 ~x86"
 IUSE="bundled-libs"
 
 RDEPEND="!bundled-libs? ( media-libs/devil
-				media-libs/fontconfig
 				media-libs/libogg
 				media-libs/libsdl2
 				media-libs/libtheora
 				media-libs/libvorbis
-				media-libs/openal
-				sys-libs/zlib
-				virtual/glu
-				virtual/opengl
-				x11-libs/libX11
-				x11-libs/libXext
-				x11-libs/libXft )"
+				media-libs/openal )
+	media-libs/fontconfig
+	sys-libs/zlib
+	virtual/glu
+	virtual/opengl
+	x11-libs/libX11
+	x11-libs/libXext
+	x11-libs/libXft"
 
 DEPEND=""
 
