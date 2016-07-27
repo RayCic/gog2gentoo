@@ -21,8 +21,8 @@ RDEPEND="!bundled-libs? ( media-libs/freetype
 				media-libs/libogg
 				media-libs/libsdl2
 				media-libs/libtheora
-				media-libs/libvorbis
-				virtual/opengl )"
+				media-libs/libvorbis )
+	virtual/opengl"
 
 DEPEND=""
 
