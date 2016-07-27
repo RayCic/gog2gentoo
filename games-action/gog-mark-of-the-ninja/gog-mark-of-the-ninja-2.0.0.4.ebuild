@@ -18,8 +18,8 @@ SRC_URI="gog_mark_of_the_ninja_2.0.0.4.sh
 KEYWORDS="-* ~amd64 ~x86"
 IUSE="bundled-libs dlc"
 
-RDEPEND="!bundled-libs? ( media-libs/libsdl
-				virtual/opengl )"
+RDEPEND="!bundled-libs? ( media-libs/libsdl )
+	virtual/opengl"
 
 DEPEND=""
 
@@ -74,7 +74,7 @@ pkg_nofetch() {
 		einfo "   2) by programm 'lgogdownloader'"
 		einfo "      a) install 'games-util/lgogdownloader': emerge games-util/lgogdownloader"
 		einfo "      b) go to temporary directory"
-		einfo "      c) run: lgogdownloader --download --game ${gog_pn} --platform 4 --language 1 --no-extras --no-patches --no-language-packs"
+		einfo "      c) run: lgogdownloader --download --game ${gog_pn} --platform linux --include installers,dlc"
 		einfo "      d) enter login information"
 		einfo
 		einfo "And do not forget to move gog_mark_of_the_ninja_2.0.0.4.sh and gog_mark_of_the_ninja_special_edition_dlc_2.0.0.4.sh to ${DISTDIR}"
@@ -93,7 +93,7 @@ pkg_nofetch() {
 		einfo "   2) by programm 'lgogdownloader'"
 		einfo "      a) install 'games-util/lgogdownloader': emerge games-util/lgogdownloader"
 		einfo "      b) go to temporary directory"
-		einfo "      c) run: lgogdownloader --download --game ${gog_pn} --platform 4 --language 1 --no-extras --no-patches --no-language-packs --no-dlc"
+		einfo "      c) run: lgogdownloader --download --game ${gog_pn} --platform linux --include installers"
 		einfo "      d) enter login information"
 		einfo
 		einfo "And do not forget to move gog_mark_of_the_ninja_2.0.0.4.sh to ${DISTDIR}"
