@@ -62,8 +62,10 @@ gog-games_pkg_nofetch() {
 
 gog-games_src_unpack() {
 	for file in ${A}; do
-		unzip -qq -o "${DISTDIR}/${file}" "${gog_s}/*" 2>/dev/null
-		[[ $? -gt 1 ]] && die "Unzip failed"
+		if [[ ${file} == *.sh ]]; then
+			unzip -qq -o "${DISTDIR}/${file}" "${gog_s}/*" 2>/dev/null
+			[[ $? -gt 1 ]] && die "${file}: Unzip failed"
+		fi
 	done
 }
 
