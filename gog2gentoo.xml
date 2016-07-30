@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE repositories SYSTEM "/dtd/repositories.dtd">
+<!DOCTYPE repositories SYSTEM "http://www.gentoo.org/dtd/repositories.dtd">
 <repositories xmlns="" version="1.0">
-	<repo quality="experimental" status="unofficial">
-		<name>gog2gentoo</name>
-		<description>GOG games Gentoo overlay</description>
-		<homepage>https://github.com/RayCic/gog2gentoo</homepage>
-		<owner>
-			<email>ray@apollo.lv</email>
-			<name>Raimonds Cicans</name>
-		</owner>
-		<source type="git">https://github.com/RayCic/gog2gentoo.git</source>
-	</repo>
+  <repo quality="experimental" status="unofficial">
+    <name>gog2gentoo</name>
+    <description lang="en">GOG games Gentoo overlay</description>
+    <homepage>https://github.com/RayCic/gog2gentoo</homepage>
+    <owner type="person">
+      <email>ray@apollo.lv</email>
+      <name>Raimonds Cicans</name>
+    </owner>
+    <source type="git">https://github.com/RayCic/gog2gentoo.git</source>
+    <source type="git">git://github.com/RayCic/gog2gentoo.git</source>
+    <source type="git">git@github.com:RayCic/gog2gentoo.git</source>
+    <feed>https://github.com/RayCic/gog2gentoo/commits/master.atom</feed>
+  </repo>
 </repositories>
