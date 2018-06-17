@@ -1,14 +1,13 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
-EAPI="5"
+EAPI=6
 
 gog_pn="multiwinia"
 
 CHECKREQS_DISK_BUILD=70M
 
-inherit gog-games
+inherit gog-games-2
 
 DESCRIPTION="Multiwinia"
 
@@ -55,16 +54,14 @@ src_install() {
 	mv * "${D}${dir}" || die
 	cp "${D}${dir}/multiwinia.png" . || die
 
-	use amd64 && games_make_wrapper "${PN}" ./multiwinia.bin.x86_64 "${dir}"
-	use x86 && games_make_wrapper "${PN}" ./multiwinia.bin.x86 "${dir}"
+	use amd64 && make_wrapper "${PN}" ./multiwinia.bin.x86_64 "${dir}"
+	use x86 && make_wrapper "${PN}" ./multiwinia.bin.x86 "${dir}"
 	newicon multiwinia.png "${PN}.png"
 	make_desktop_entry "${PN}" "${DESCRIPTION}" ${PN}
-
-	prepgamesdirs
 }
 
 pkg_postinst() {
-	gog-games_pkg_postinst
+	gog-games-2_pkg_postinst
 
 	use nas && elog "Warning! You chose 'nas' USE flag. NAS audio system is not supported by OpenAL library."
 	use nas && elog "If you really use NAS audio system as primary audio system, then do not select OpenAL"

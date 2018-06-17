@@ -1,14 +1,13 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
-EAPI="5"
+EAPI=6
 
 gog_pn="amnesia_a_machine_for_pigs"
 
 CHECKREQS_DISK_BUILD=5500M
 
-inherit gog-games
+inherit gog-games-2
 
 DESCRIPTION="Amnesia: A Machine For Pigs"
 
@@ -17,12 +16,16 @@ SRC_URI="gog_amnesia_a_machine_for_pigs_2.0.0.2.sh"
 KEYWORDS="-* ~amd64 ~x86"
 IUSE="bundled-libs"
 
-RDEPEND="!bundled-libs? ( media-libs/devil
+RDEPEND="!bundled-libs? ( media-libs/devil[jpeg,png]
 				media-libs/libogg
-				media-libs/libsdl2
+				media-libs/libsdl2[X,video,sound,opengl]
 				media-libs/libtheora
 				media-libs/libvorbis
-				media-libs/openal )
+				|| ( media-libs/openal[alsa]
+					media-libs/openal[jack]
+					media-libs/openal[oss]
+					media-libs/openal[pulseaudio] ) )
+	bundled-libs? ( || ( media-libs/alsa-lib media-sound/pulseaudio ) )
 	media-libs/fontconfig
 	sys-libs/zlib
 	virtual/glu
@@ -41,8 +44,6 @@ src_install() {
 		rm -rf lib lib64 || die
 	fi
 
-	chmod 0750 AmnesiaAMFP.bin.x86 Launcher.bin.x86 AmnesiaAMFP.bin.x86_64 Launcher.bin.x86_64
-
 	use amd64 || rm AmnesiaAMFP.bin.x86_64 Launcher.bin.x86_64 || die
 	use x86 || rm AmnesiaAMFP.bin.x86 Launcher.bin.x86 || die
 
@@ -51,10 +52,8 @@ src_install() {
 	mv * "${D}${dir}" || die
 	cp "${D}${dir}/AmnesiaAMFP.png" . || die
 
-	use amd64 && games_make_wrapper "${PN}" ./Launcher.bin.x86_64 "${dir}"
-	use x86 && games_make_wrapper "${PN}" ./Launcher.bin.x86 "${dir}"
+	use amd64 && make_wrapper "${PN}" ./Launcher.bin.x86_64 "${dir}"
+	use x86 && make_wrapper "${PN}" ./Launcher.bin.x86 "${dir}"
 	newicon AmnesiaAMFP.png "${PN}.png"
 	make_desktop_entry "${PN}" "${DESCRIPTION}" ${PN}
-
-	prepgamesdirs
 }

@@ -1,14 +1,13 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
-EAPI="5"
+EAPI=6
 
 gog_pn="defcon"
 
 CHECKREQS_DISK_BUILD=70M
 
-inherit gog-games
+inherit gog-games-2
 
 DESCRIPTION="DEFCON"
 
@@ -52,10 +51,8 @@ src_install() {
 	mv * "${D}${dir}" || die
 	cp "${D}${dir}/defcon.png" . || die
 
-	use amd64 && games_make_wrapper "${PN}" ./defcon.bin.x86_64 "${dir}"
-	use x86 && games_make_wrapper "${PN}" ./defcon.bin.x86 "${dir}"
+	use amd64 && make_wrapper "${PN}" ./defcon.bin.x86_64 "${dir}"
+	use x86 && make_wrapper "${PN}" ./defcon.bin.x86 "${dir}"
 	newicon defcon.png "${PN}.png"
 	make_desktop_entry "${PN}" "${DESCRIPTION}" ${PN}
-
-	prepgamesdirs
 }

@@ -1,14 +1,13 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
-EAPI="5"
+EAPI=6
 
 gog_pn="mark_of_the_ninja"
 
 CHECKREQS_DISK_BUILD=2500M
 
-inherit gog-games
+inherit gog-games-2
 
 DESCRIPTION="Mark of the Ninja"
 
@@ -18,10 +17,10 @@ SRC_URI="gog_mark_of_the_ninja_2.0.0.4.sh
 KEYWORDS="-* ~amd64 ~x86"
 IUSE="bundled-libs dlc"
 
-RDEPEND="!bundled-libs? ( media-libs/libsdl )
+RDEPEND="!bundled-libs? ( media-libs/libsdl[X,opengl,video,sound] )
 	virtual/opengl"
 
-DEPEND=""
+DEPEND="app-admin/chrpath"
 
 src_install() {
 	# Fix library files duplication
@@ -36,6 +35,10 @@ src_install() {
 	ln -sf libSDL-1.2.so.0.11.4 bin/lib64/libSDL-1.2.so || die
 	ln -sf libSDL-1.2.so.0.11.4 bin/lib64/libSDL.so || die
 
+	# Fix security warnings
+	chrpath --replace '$ORIGIN/lib32' bin/ninja-bin32 || die
+	chrpath --replace '$ORIGIN/lib64' bin/ninja-bin64 || die
+
 	use bundled-libs || rm bin/lib32/libSDL* bin/lib64/libSDL* || die
 
 	use amd64 || rm -rf bin/lib64 bin/ninja-bin64 || die
@@ -48,12 +51,10 @@ src_install() {
 	mv * "${D}${dir}" || die
 	cp "${D}${dir}/bin/motn_icon.xpm" . || die
 
-	use amd64 && games_make_wrapper "${PN}" ./ninja-bin64 "${dir}/bin"
-	use x86 && games_make_wrapper "${PN}" ./ninja-bin32 "${dir}/bin"
+	use amd64 && make_wrapper "${PN}" ./ninja-bin64 "${dir}/bin"
+	use x86 && make_wrapper "${PN}" ./ninja-bin32 "${dir}/bin"
 	newicon motn_icon.xpm "${PN}.xpm"
 	make_desktop_entry "${PN}" "${DESCRIPTION}" ${PN}
-
-	prepgamesdirs
 }
 
 pkg_nofetch() {

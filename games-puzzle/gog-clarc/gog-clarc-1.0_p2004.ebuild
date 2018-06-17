@@ -1,14 +1,13 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
-EAPI="5"
+EAPI=6
 
 gog_pn="clarc"
 
 CHECKREQS_DISK_BUILD=800M
 
-inherit gog-games
+inherit gog-games-2
 
 DESCRIPTION="CLARC"
 
@@ -41,9 +40,7 @@ src_install() {
 	mv * "${D}${dir}" || die
 	cp "${D}${dir}/CLARC_LINUX_Data/Resources/UnityPlayer.png" . || die
 
-	games_make_wrapper "${PN}" ./CLARC_LINUX.x86 "${dir}"
+	make_wrapper "${PN}" ./CLARC_LINUX.x86 "${dir}"
 	newicon UnityPlayer.png "${PN}.png"
 	make_desktop_entry "${PN}" "${DESCRIPTION}" ${PN}
-
-	prepgamesdirs
 }

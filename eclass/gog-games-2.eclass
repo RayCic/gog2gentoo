@@ -2,20 +2,20 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
-# @ECLASS: gog-games.eclass
+# @ECLASS: gog-games-2.eclass
 # @MAINTAINER:
 # Raimonds Cicans <ray@apollo.lv>
 # @BLURB: Eclass for GOG games packages
 # @DESCRIPTION:
-# The gog-games eclass contains miscellaneous, useful functions for GOG games packages.
+# The gog-games-2 eclass contains miscellaneous, useful functions for GOG games packages.
 #
 
-inherit check-reqs eutils games
+inherit check-reqs eutils
 
 case "${EAPI:-0}" in
-	5)
+	6)
 		;;
-	0|1|2|3|4)
+	0|1|2|3|4|5)
 		die "EAPI=\"${EAPI}\" is not supported anymore"
 		;;
 	*)
@@ -35,11 +35,11 @@ RESTRICT="bindist strip test fetch"
 
 gog_s="data/noarch/game"
 S="${WORKDIR}/${gog_s}"
-dir=${GAMES_PREFIX_OPT}/${PN}
+dir="/opt/${PN}"
 
 EXPORT_FUNCTIONS pkg_nofetch src_unpack pkg_postinst
 
-gog-games_pkg_nofetch() {
+gog-games-2_pkg_nofetch() {
 	einfo "Please download ${SRC_URI} from your GOG.com account after buying '${DESCRIPTION}'"
 	einfo "and put it into ${DISTDIR}."
 	einfo
@@ -60,7 +60,7 @@ gog-games_pkg_nofetch() {
 	einfo "And do not forget to move ${SRC_URI} to ${DISTDIR}"
 }
 
-gog-games_src_unpack() {
+gog-games-2_src_unpack() {
 	for file in ${A}; do
 		if [[ ${file} == *.sh ]]; then
 			unzip -qq -o "${DISTDIR}/${file}" "${gog_s}/*" 2>/dev/null
@@ -69,7 +69,7 @@ gog-games_src_unpack() {
 	done
 }
 
-gog-games_pkg_postinst() {
+gog-games-2_pkg_postinst() {
 	if [ ! -z "${game_require_serial_key}" ]; then
 		elog "This game require serial key. You can obtain serial key following way"
 		elog "   1) open in internet browser 'https://www.gog.com'"

@@ -1,14 +1,13 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
-EAPI="5"
+EAPI=6
 
 gog_pn="grim_fandango_remastered"
 
 CHECKREQS_DISK_BUILD=6G
 
-inherit gog-games
+inherit gog-games-2
 
 DESCRIPTION="Grim Fandango Remastered"
 
@@ -18,8 +17,12 @@ SRC_URI="gog_grim_fandango_remastered_2.3.0.7.sh
 KEYWORDS="-* ~amd64 ~x86"
 IUSE="+bundled-libs savedir-patch"
 
-RDEPEND="!bundled-libs? ( =media-libs/libsdl2-2.0*[abi_x86_32(-)] )
+RDEPEND="!bundled-libs? ( =media-libs/libsdl2-2.0*[X,opengl,abi_x86_32(-)] )
 	x11-libs/libX11[abi_x86_32(-)]
+	x11-libs/libXcursor[abi_x86_32(-)]
+	x11-libs/libXinerama[abi_x86_32(-)]
+	x11-libs/libXi[abi_x86_32(-)]
+	x11-libs/libXrandr[abi_x86_32(-)]
 	virtual/glu[abi_x86_32(-)]
 	virtual/opengl[abi_x86_32(-)]"
 
@@ -49,15 +52,13 @@ src_install() {
 		use x86 || ln -sf "/usr/lib/libSDL2-2.0.so.0"  "${D}${dir}/libSDL2-2.0.so.1"|| die
 	fi
 
-	games_make_wrapper "${PN}" ./GrimFandango "${dir}"
+	make_wrapper "${PN}" ./GrimFandango "${dir}"
 	newicon icon.png "${PN}.png"
 	make_desktop_entry "${PN}" "${DESCRIPTION}" ${PN}
-
-	prepgamesdirs
 }
 
 pkg_postinst() {
-	gog-games_pkg_postinst
+	gog-games-2_pkg_postinst
 
 	use bundled-libs || ewarn "Warning! You disabled 'bundled-libs' flag."
 	use bundled-libs || ewarn "For this game this configuration is not supported."
@@ -75,7 +76,7 @@ pkg_postinst() {
 }
 
 pkg_nofetch() {
-	gog-games_pkg_nofetch()
+	gog-games-2_pkg_nofetch()
 
 	if use savedir-patch; then
 		einfo

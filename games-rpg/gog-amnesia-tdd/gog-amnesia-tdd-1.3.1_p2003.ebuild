@@ -1,14 +1,13 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
-EAPI="5"
+EAPI=6
 
 gog_pn="amnesia_the_dark_descent"
 
 CHECKREQS_DISK_BUILD=2500M
 
-inherit gog-games
+inherit gog-games-2
 
 DESCRIPTION="Amnesia: The Dark Descent"
 
@@ -17,12 +16,16 @@ SRC_URI="gog_amnesia_the_dark_descent_2.0.0.3.sh"
 KEYWORDS="-* ~amd64 ~x86"
 IUSE="bundled-libs"
 
-RDEPEND="!bundled-libs? ( media-libs/devil
+RDEPEND="!bundled-libs? ( media-libs/devil[jpeg,png]
 				media-libs/libogg
-				media-libs/libsdl2
+				media-libs/libsdl2[X,video,sound,opengl]
 				media-libs/libtheora
 				media-libs/libvorbis
-				media-libs/openal )
+				|| ( media-libs/openal[alsa]
+					media-libs/openal[jack]
+					media-libs/openal[oss]
+					media-libs/openal[pulseaudio] ) )
+	bundled-libs? ( || ( media-libs/alsa-lib media-sound/pulseaudio ) )
 	media-libs/fontconfig
 	sys-libs/zlib
 	virtual/glu
@@ -41,8 +44,6 @@ src_install() {
 		rm -rf lib lib64 || die
 	fi
 
-	chmod 0750 Amnesia.bin.x86 Launcher.bin.x86 Amnesia.bin.x86_64 Launcher.bin.x86_64
-
 	use amd64 || rm Amnesia.bin.x86_64 Launcher.bin.x86_64 || die
 	use x86 || rm Amnesia.bin.x86 Launcher.bin.x86 || die
 
@@ -51,10 +52,8 @@ src_install() {
 	mv * "${D}${dir}" || die
 	cp "${D}${dir}/Amnesia.png" . || die
 
-	use amd64 && games_make_wrapper "${PN}" ./Launcher.bin.x86_64 "${dir}"
-	use x86 && games_make_wrapper "${PN}" ./Launcher.bin.x86 "${dir}"
+	use amd64 && make_wrapper "${PN}" ./Launcher.bin.x86_64 "${dir}"
+	use x86 && make_wrapper "${PN}" ./Launcher.bin.x86 "${dir}"
 	newicon Amnesia.png "${PN}.png"
 	make_desktop_entry "${PN}" "${DESCRIPTION}" ${PN}
-
-	prepgamesdirs
 }

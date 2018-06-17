@@ -1,24 +1,23 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
-EAPI="5"
+EAPI=6
 
 gog_pn="brutal_legend"
 
 CHECKREQS_DISK_BUILD=9G
 
-inherit gog-games
+inherit gog-games-2
 
 DESCRIPTION="Brutal Legend"
 
-SRC_URI="gog_brutal_legend_2.0.0.2.sh"
+SRC_URI="gog_brutal_legend_2.0.0.3.sh"
 
 KEYWORDS="-* ~amd64 ~x86"
 
 IUSE="bundled-libs"
 
-RDEPEND="!bundled-libs? ( media-libs/libsdl2[abi_x86_32(-)] )
+RDEPEND="!bundled-libs? ( media-libs/libsdl2[X,opengl,video,sound,abi_x86_32(-)] )
 	sys-libs/zlib[abi_x86_32(-)]
 	virtual/glu[abi_x86_32(-)]
 	virtual/opengl[abi_x86_32(-)]"
@@ -37,9 +36,7 @@ src_install() {
 	pngfix --quiet --out=Buddha.png "${D}${dir}/Buddha.png"
 	cp --force Buddha.png "${D}${dir}/Buddha.png" || die "pngfix failed"
 
-	games_make_wrapper "${PN}" ./Buddha.bin.x86 "${dir}"
+	make_wrapper "${PN}" ./Buddha.bin.x86 "${dir}"
 	newicon Buddha.png "${PN}.png"
 	make_desktop_entry "${PN}" "${DESCRIPTION}" ${PN}
-
-	prepgamesdirs
 }

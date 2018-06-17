@@ -1,14 +1,13 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
-EAPI="5"
+EAPI=6
 
 gog_pn="darwinia"
 
 CHECKREQS_DISK_BUILD=50M
 
-inherit gog-games
+inherit gog-games-2
 
 DESCRIPTION="Darwinia"
 
@@ -49,10 +48,8 @@ src_install() {
 	mv * "${D}${dir}" || die
 	cp "${D}${dir}/darwinian.png" . || die
 
-	use amd64 && games_make_wrapper "${PN}" ./darwinia.bin.x86_64 "${dir}"
-	use x86 && games_make_wrapper "${PN}" ./darwinia.bin.x86 "${dir}"
+	use amd64 && make_wrapper "${PN}" ./darwinia.bin.x86_64 "${dir}"
+	use x86 && make_wrapper "${PN}" ./darwinia.bin.x86 "${dir}"
 	newicon darwinian.png "${PN}.png"
 	make_desktop_entry "${PN}" "${DESCRIPTION}" ${PN}
-
-	prepgamesdirs
 }

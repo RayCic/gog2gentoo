@@ -1,14 +1,13 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
-EAPI="5"
+EAPI=6
 
 gog_pn="world_of_goo"
 
 CHECKREQS_DISK_BUILD=80M
 
-inherit gog-games
+inherit gog-games-2
 
 DESCRIPTION="World of Goo"
 
@@ -16,15 +15,11 @@ SRC_URI="gog_world_of_goo_2.0.0.3.sh"
 
 KEYWORDS="-* ~amd64 ~x86"
 
-IUSE="bundled-libs alsa nas oss pulseaudio"
-REQUIRED_USE="|| ( alsa nas oss pulseaudio )"
+IUSE="bundled-libs"
 
-RDEPEND="!bundled-libs? ( media-libs/libsdl[X,opengl,video,sound,alsa?,nas?,oss?,pulseaudio?]
+RDEPEND="!bundled-libs? ( media-libs/libsdl[X,opengl,video,sound]
 				media-libs/sdl-mixer[vorbis] )
-	bundled-libs? ( media-libs/libvorbis
-			alsa? ( media-libs/alsa-lib )
-			nas? ( media-libs/nas )
-			pulseaudio? ( media-sound/pulseaudio ) )
+	bundled-libs? ( media-libs/libvorbis )
 	virtual/glu
 	virtual/opengl"
 
@@ -46,14 +41,12 @@ src_install() {
 	cp "${D}${dir}/icons/scalable.svg" . || die
 
 	if use bundled-libs; then
-		use amd64 && games_make_wrapper "${PN}" ./WorldOfGoo.bin64 "${dir}" "./libs64"
-		use x86 && games_make_wrapper "${PN}" ./WorldOfGoo.bin32 "${dir}" "./libs32"
+		use amd64 && make_wrapper "${PN}" ./WorldOfGoo.bin64 "${dir}" "./libs64"
+		use x86 && make_wrapper "${PN}" ./WorldOfGoo.bin32 "${dir}" "./libs32"
 	else
-		use amd64 && games_make_wrapper "${PN}" ./WorldOfGoo.bin64 "${dir}"
-		use x86 && games_make_wrapper "${PN}" ./WorldOfGoo.bin32 "${dir}"
+		use amd64 && make_wrapper "${PN}" ./WorldOfGoo.bin64 "${dir}"
+		use x86 && make_wrapper "${PN}" ./WorldOfGoo.bin32 "${dir}"
 	fi
 	newicon scalable.svg "${PN}.svg"
 	make_desktop_entry "${PN}" "${DESCRIPTION}" ${PN}
-
-	prepgamesdirs
 }

@@ -1,0 +1,4 @@
+games-action/gog-brutal-legend
+games-puzzle/gog-clarc
+games-rpg/gog-grim-fandango-remastered
+games-rpg/gog-witcher2
