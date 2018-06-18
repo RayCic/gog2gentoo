@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="person">
+		<email>ray@apollo.lv</email>
+		<name>Raimonds Cicans</name>
+	</maintainer>
+	<use>
+		<flag name='bundled-libs'>Use the upstream provided bundled libraries.</flag>
+		<flag name='dlc-tcc'>Support for 'Darkest Dungeon: The Crimson Court' DLC.</flag>
+		<flag name='dlc-tsb'>Support for 'Darkest Dungeon: The Shieldbreaker' DLC.</flag>
+	</use>
+	<upstream>
+		<bugs-to>https://www.gog.com/support</bugs-to>
+	</upstream>
+</pkgmetadata>
